@@ -1,0 +1,64 @@
+body{
+    background-image: url("./images/cloudy-day.png");
+}
+
+h2,
+h3{
+    color: #434e52;
+}
+
+.cardDateText{
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+
+.icon{
+    margin-left: 33%;
+    
+}
+
+.city{
+    font-size: 30px;
+}
+
+.card-panel{
+    margin-top: 0px;
+    background: #464159;
+}
+
+#mainPanel{
+    margin-top: 45px;
+    background: #8bbabb;
+    padding-top: 0px;
+}
+
+#citySearch{
+    background: #8bbabb;
+}
+
+.cardCityText,
+.cardDate1Text,
+.iconImage1{
+    float: left;
+    font-size: 30px;
+    font-weight: 500;
+    padding-left: 5px;
+    font-color: #434e52;
+}
+
+#weatherDash{
+    text-align: center;
+    margin: auto;
+}
+
+.row .col.l11{
+    background: ghostwhite;
+}
+
+.col{
+    width: 20%;
+    
+}

@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="./style.css">
 
     <title>Weather Dashboard</title>
 </head>
 <body>
-    <div class="card-panel teal lighten-3">
-        <h3 class="white-text">Weather Dashboard</h3>
+    <div class="card-panel id="dash">
+        <h3 id="weatherDash" class="white-text">Weather Dashboard</h3>
     </div>
 
     <div class="row">
@@ -25,10 +26,11 @@
               <form>
                 <div class="input-field">
                     <!-- <label >Search for a City:</label> -->
-                    <input id="citySearch" type="search" class="teal lighten-4" required>
+                    <input id="citySearch" type="search" required>
                   <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                  <i class="material-icons">close</i>
-                  <button id="submitBtn">Submit</button>
+                  <i class="material-icons" id="clear">close</i>
+                  <button style="visibility:hidden;" id="submitBtn">Submit</button>
+                  
                 </div>
               </form>
             </div>
@@ -39,18 +41,18 @@
         <br>
     </div>
 </div>
-    <div class="col s9">
+    <div class="col s9" >
         
-            <div class="col s12 m8 l8">
-              <div class="card-panel white">
-                <span id="mainCard" class="purple-text"></span>
+            <div class="col s12 m11 l11" >
+              <div class="card-panel" id="mainPanel">
+                <span id="mainCard" class="black-text"></span>
               </div>
               <div id=resultsList></div>
 
               <br>
               <br>
       
-              <h1>5-Day Forecast:</h1>
+              <h3>5-Day Forecast:</h3>
               <br>
       
               <div id="forecast">
