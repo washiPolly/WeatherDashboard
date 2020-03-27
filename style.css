@@ -3,20 +3,22 @@ body{
 }
 
 h2,
-h3{
-    color: #434e52;
+h5{
+    color: #464169;
+    font-weight: 500;
 }
 
 .cardDateText{
     font-weight: 500;
     font-size: 20px;
     text-align: center;
+    color: #464169;
 }
 
 
 
-.icon{
-    margin-left: 33%;
+#icon {
+    margin-left: 30%;
     
 }
 
@@ -46,8 +48,10 @@ h3{
     font-size: 30px;
     font-weight: 500;
     padding-left: 5px;
-    font-color: #434e52;
+    color: #464169;
 }
+
+
 
 #weatherDash{
     text-align: center;
@@ -61,4 +65,21 @@ h3{
 .col{
     width: 20%;
     
+}
+
+.card-panel.col.s1.m1.l1{
+    width: 60px;
+    text-align: center;
+    float: left;
+}
+#uvFav{
+    background: #ffd740;
+}
+
+#uvMod{
+    background: #00bfa5;
+}
+
+#uvSev{
+    background: #ff1744;
 }

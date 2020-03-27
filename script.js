@@ -3,13 +3,15 @@ var resultsListSpan = document.querySelector("#resultsList");
 var mainCardSpan = document.querySelector("#mainCard").textContent;
 var autoGenCards;
 
+
 $("#submitBtn").on("click", function displayInfo(event) {
     event.preventDefault();
     // $("#empty").empty();
     var cityLat; 
     var cityLon; 
     var citySearch = $("#citySearch").val().trim();
-    console.log(citySearch);
+    var city;
+    
 
 
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + citySearch + "&units=imperial&uvi?&appid=30e1a5ef81aa152b5f387d986488443d"
@@ -67,7 +69,7 @@ $("#submitBtn").on("click", function displayInfo(event) {
             var icon = response.list[i].weather[0].icon;
             var iconURL = "http://openweathermap.org/img/wn/" + icon + ".png"
             var iconImage = $("<img>").attr("src", iconURL);
-            iconImage.addClass("icon");
+            iconImage.attr("id","icon");
 
             var temp = response.list[i].main.temp;
             var humidity = response.list[i].main.humidity;
@@ -99,27 +101,58 @@ $.ajax({
 .then(function (response) {
     var results = response.data;
     var uvIndex = response.value;
+    var uvClass = $("<div>").addClass("card-panel col s1 m1 l1").text(uvIndex);
+    uvClass.attr("id","");
+    var p3 = $("<div>").addClass("cardHumidText").text("UV Index: ");
 
-    $("#mainCard").append("<br>" + "UV Index: " + uvIndex);
+    $("#mainCard").append(p3, uvClass);
+
+    function displayMessage(type) {
+        uvClass.setAttribute("id", type);
+      }
+
+
+    if(uvIndex < 2){
+        displayMessage("uvFav");
+    } else if (uvIndex > 3 || uvIndex < 5){
+        displayMessage("uvMod")
+    } else {
+        displayMessage("uvSev")
+    }
+ console.log(uvClass.attr("id"));
+   
+
+    
+
+
+
 
 });
+
+
+
+
 
 };
 
 
-$("#submitBtn").on("click", function saveSearch (event) {
+
+$("#submitBtn").on("click", function saveSearch(event) {
     event.preventDefault();
     var searchDiv = $(".input-field");
-    var inputSpan = $("#citySearch").val().trim();
-
+console.log(city);
     var s0 = $("<p>").addClass("input").text(inputSpan);
 
 
     var searchPanel = $("<div>").addClass("card-panel teal lighten-4").appendTo(searchDiv);     
-    searchPanel.text(inputSpan);
+    searchPanel.attr("data-save","searchedCity");
+    searchPanel.text(city);
     
-    displayInfo(searchDiv);
+    $("#searchedCity").on("click", function(){
 
+     
+        localStorage.setItem("inputSpan", inputSpan);
+    });
 });
 
     //adding clear function to search box
