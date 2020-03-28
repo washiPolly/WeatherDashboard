@@ -11,6 +11,7 @@ h4{
     font-weight: 500;
     text-align: center;
     text-shadow: 1px 1px 3px #8bbabb;
+    font-size: 30px;
 }
 
 .cardDateText{
@@ -58,14 +59,6 @@ h4{
 }
 
 
-
-
-
-
-}
-
-
-
 #weatherDash{
     text-align: center;
     margin: auto;
@@ -89,6 +82,7 @@ h4{
     width: 60px;
     height: 25px;
     text-align: center;
+    margin-left: 3px;
 }
 .uvFav{
     background: #ffd740;
@@ -109,4 +103,13 @@ h4{
     padding-left: 5px;
     padding-right: 5px;
     box-shadow: 1px 1px 3px 1px #464169;
+}
+
+.searchedCity{
+    background: #b2dfdb;
+    color: #464169;
+}
+
+.searchPanelDiv{
+    margin-top: -20px;
 }

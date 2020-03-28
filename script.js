@@ -3,8 +3,9 @@ $(document).ready(function(){
 var resultsListSpan = document.querySelector("#resultsList");
 var mainCardSpan = document.querySelector("#mainCard").textContent;
 var autoGenCards;
-var history = window.localStorage.getItem("eachCity");
-
+var history = JSON.parse(window.localStorage.getItem("history")) || [];
+    //create a empty array
+    var history = [];
 
 $("#submitBtn").on("click", function displayInfo(event) {
     event.preventDefault();
@@ -12,14 +13,18 @@ $("#submitBtn").on("click", function displayInfo(event) {
     var citySearch = $("#citySearch").val().trim();
     console.log(citySearch);
     
+   
 
+    
+    var newHistoryObj = {
+        "history": citySearch
+    }
 
-    //create a empty array
-    var history = [];
+    history.push(newHistoryObj);
     //push each searched city into history
-    history.push(citySearch);
+    // history.push(JSON.stringify(citySearch));
     //set each history to local storage
-    window.localStorage.setItem("history", history);
+    window.localStorage.setItem("history", JSON.stringify(history));
      
 
     searchWeather(citySearch);
@@ -77,7 +82,7 @@ $("#submitBtn").on("click", function displayInfo(event) {
 
             //5-Day Forecase Cards
             $(".fiveDay").text("5-Day Forecast");
-            for (var i = 7; i < 40 ; i+=7){
+            for (var i = 8; i < 40 ; i+=7){
             var cardDiv = $("<div>").addClass("col").appendTo($("#forecast"));     
             var cardPanel = $("<div>").addClass("card-panel teal lighten-4 white z-depth-3").appendTo(cardDiv);     
             cardPanel.attr("id","autoGenCards");
@@ -115,10 +120,12 @@ $("#submitBtn").on("click", function displayInfo(event) {
 
 
 function createPanel(citySearch){
-    console.log(citySearch);
-    var s0 = $("<p>").addClass("input").text(citySearch);
-    var searchPanel = $("<div>").addClass("card-panel teal lighten-4").appendTo($(".input-field"));     
-    searchPanel.attr("data-save","searchedCity");
+    var searchPanel = $('<div class="searchPanelDiv"></div>');
+    
+    // searchPanel.attr("data-save","searchedCity");
+    var s0 = $("<span>").addClass("btn searchedCity").text(citySearch).appendTo(searchPanel);
+
+    $(".input-field").append(searchPanel);
 }
 
 
@@ -140,17 +147,19 @@ $.ajax({
     var uvClass = $("<span>").addClass("uvIndex").text(uvIndex);
     p3.append(uvClass);
 
-    // $("#mainCard").append("<br>" +  uvClass);
     $("#mainCard").append(p3);
     
         // setting uvClass for color coding
-        if(uvIndex <= 2){
+       
+        if(uvIndex <= 2.99){
             uvClass.addClass("uvFav");
-        } else if (uvIndex >= 3 || uvIndex <= 5){
+        }else if (uvIndex >= 3 && uvIndex <= 5.99){
             uvClass.addClass("uvMod")
         } else {
             uvClass.addClass("uvSev")
         }
+        console.log(typeof uvIndex);
+        console.log(uvIndex);
       
 
  
@@ -207,3 +216,18 @@ $.ajax({
 
 
 });
+
+function displayHistory(){
+
+for(var i = 0; i < history.length; i++){
+    var historyHTML = 
+
+    //splice to remove i object
+
+    $(".input-field").append(historyHTML);
+    //clear history
+    
+}
+
+
+}
