@@ -2,10 +2,15 @@ body{
     background-image: url("./images/cloudy-day.png");
 }
 
-h2,
-h5{
+h2{
     color: #464169;
     font-weight: 500;
+}
+h4{
+    color: #464169;
+    font-weight: 500;
+    text-align: center;
+    text-shadow: 1px 1px 3px #8bbabb;
 }
 
 .cardDateText{
@@ -13,9 +18,8 @@ h5{
     font-size: 20px;
     text-align: center;
     color: #464169;
+    text-shadow: 1px 1px 3px grey;
 }
-
-
 
 #icon {
     margin-left: 30%;
@@ -29,10 +33,11 @@ h5{
 .card-panel{
     margin-top: 0px;
     background: #464159;
+    padding:20px;
 }
 
 #mainPanel{
-    margin-top: 45px;
+    margin: 45px;
     background: #8bbabb;
     padding-top: 0px;
 }
@@ -49,6 +54,14 @@ h5{
     font-weight: 500;
     padding-left: 5px;
     color: #464169;
+    text-shadow: 1px 1px 3px grey;
+}
+
+
+
+
+
+
 }
 
 
@@ -67,19 +80,33 @@ h5{
     
 }
 
-.card-panel.col.s1.m1.l1{
+.cardUVText{
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.uvIndex{
     width: 60px;
+    height: 25px;
     text-align: center;
-    float: left;
 }
-#uvFav{
+.uvFav{
     background: #ffd740;
+    padding-left: 5px;
+    padding-right: 5px;
+    box-shadow: 1px 1px 3px 1px #464169;
 }
 
-#uvMod{
-    background: #00bfa5;
+.uvMod{
+    background: #aed581;
+    padding-left: 5px;
+    padding-right: 5px;
+    box-shadow: 1px 1px 3px 1px #464169;
 }
 
-#uvSev{
+.uvSev{
     background: #ff1744;
+    padding-left: 5px;
+    padding-right: 5px;
+    box-shadow: 1px 1px 3px 1px #464169;
 }

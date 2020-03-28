@@ -1,20 +1,40 @@
-// var citySearch = document.querySelector("#citySearch").value;
+$(document).ready(function(){
+
 var resultsListSpan = document.querySelector("#resultsList");
 var mainCardSpan = document.querySelector("#mainCard").textContent;
 var autoGenCards;
+var history = window.localStorage.getItem("eachCity");
 
 
 $("#submitBtn").on("click", function displayInfo(event) {
     event.preventDefault();
-    // $("#empty").empty();
-    var cityLat; 
-    var cityLon; 
+    
     var citySearch = $("#citySearch").val().trim();
-    var city;
+    console.log(citySearch);
     
 
 
-    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + citySearch + "&units=imperial&uvi?&appid=30e1a5ef81aa152b5f387d986488443d"
+    //create a empty array
+    var history = [];
+    //push each searched city into history
+    history.push(citySearch);
+    //set each history to local storage
+    window.localStorage.setItem("history", history);
+     
+
+    searchWeather(citySearch);
+    createPanel(citySearch);
+
+    });
+
+
+    function searchWeather(citySearch){
+    var cityLat; 
+    var cityLon; 
+    
+    
+    
+       var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + citySearch + "&units=imperial&uvi?&appid=30e1a5ef81aa152b5f387d986488443d"
 
     $.ajax({
             url: queryURL,
@@ -50,12 +70,13 @@ $("#submitBtn").on("click", function displayInfo(event) {
             // // $("#mainCard").append(iconImage);
             $("#mainCard").append("<br>" + "Temperature: " + temp + " °F");
             $("#mainCard").append("<br>" + "Humidity: " + humidity + "%");
-            $("#mainCard").append("<br>" + "Wind Speed: " + wind +"   MPH");
+            $("#mainCard").append("<br>" + "Wind Speed: " + wind +"   MPH" );
             
 
             var card = $("<div>").addClass("card").appendTo($("#resultsList"));
 
             //5-Day Forecase Cards
+            $(".fiveDay").text("5-Day Forecast");
             for (var i = 7; i < 40 ; i+=7){
             var cardDiv = $("<div>").addClass("col").appendTo($("#forecast"));     
             var cardPanel = $("<div>").addClass("card-panel teal lighten-4 white z-depth-3").appendTo(cardDiv);     
@@ -85,7 +106,21 @@ $("#submitBtn").on("click", function displayInfo(event) {
 
         });      
         
-});
+    }
+                       
+               
+            
+
+
+
+
+function createPanel(citySearch){
+    console.log(citySearch);
+    var s0 = $("<p>").addClass("input").text(citySearch);
+    var searchPanel = $("<div>").addClass("card-panel teal lighten-4").appendTo($(".input-field"));     
+    searchPanel.attr("data-save","searchedCity");
+}
+
 
 
 
@@ -101,25 +136,26 @@ $.ajax({
 .then(function (response) {
     var results = response.data;
     var uvIndex = response.value;
-    var uvClass = $("<div>").addClass("card-panel col s1 m1 l1").text(uvIndex);
-    uvClass.attr("id","");
-    var p3 = $("<div>").addClass("cardHumidText").text("UV Index: ");
+    var p3 = $("<p>").addClass("cardUVText").text("UV Index: ");
+    var uvClass = $("<span>").addClass("uvIndex").text(uvIndex);
+    p3.append(uvClass);
 
-    $("#mainCard").append(p3, uvClass);
+    // $("#mainCard").append("<br>" +  uvClass);
+    $("#mainCard").append(p3);
+    
+        // setting uvClass for color coding
+        if(uvIndex <= 2){
+            uvClass.addClass("uvFav");
+        } else if (uvIndex >= 3 || uvIndex <= 5){
+            uvClass.addClass("uvMod")
+        } else {
+            uvClass.addClass("uvSev")
+        }
+      
 
-    function displayMessage(type) {
-        uvClass.setAttribute("id", type);
-      }
+ 
 
-
-    if(uvIndex < 2){
-        displayMessage("uvFav");
-    } else if (uvIndex > 3 || uvIndex < 5){
-        displayMessage("uvMod")
-    } else {
-        displayMessage("uvSev")
-    }
- console.log(uvClass.attr("id"));
+  
    
 
     
@@ -137,23 +173,10 @@ $.ajax({
 
 
 
-$("#submitBtn").on("click", function saveSearch(event) {
-    event.preventDefault();
-    var searchDiv = $(".input-field");
-console.log(city);
-    var s0 = $("<p>").addClass("input").text(inputSpan);
-
-
-    var searchPanel = $("<div>").addClass("card-panel teal lighten-4").appendTo(searchDiv);     
-    searchPanel.attr("data-save","searchedCity");
-    searchPanel.text(city);
+// $("#submitBtn").on("click", function saveSearch(event) {
+//     event.preventDefault();
     
-    $("#searchedCity").on("click", function(){
-
-     
-        localStorage.setItem("inputSpan", inputSpan);
-    });
-});
+// });
 
     //adding clear function to search box
     var clearButton = document.getElementById('clear')
@@ -181,3 +204,6 @@ console.log(city);
      
         console.log($("#autoGenCards"))
     });
+
+
+});
