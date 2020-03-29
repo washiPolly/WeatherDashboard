@@ -3,9 +3,14 @@ $(document).ready(function(){
 var resultsListSpan = document.querySelector("#resultsList");
 var mainCardSpan = document.querySelector("#mainCard").textContent;
 var autoGenCards;
-var history = JSON.parse(window.localStorage.getItem("history")) || [];
-    //create a empty array
-    var history = [];
+var history;
+//create a empty array if nothing in localStorage
+if(JSON.parse(window.localStorage.getItem("history")) == null) {
+    history = [];
+} else{
+    history = JSON.parse(window.localStorage.getItem("history"));
+}
+    
 
 
 $("#submitBtn").on("click", function displayInfo(event) {
