@@ -7,6 +7,7 @@ var history = JSON.parse(window.localStorage.getItem("history")) || [];
     //create a empty array
     var history = [];
 
+
 $("#submitBtn").on("click", function displayInfo(event) {
     event.preventDefault();
     
@@ -16,14 +17,11 @@ $("#submitBtn").on("click", function displayInfo(event) {
    
 
     
-    var newHistoryObj = {
-        "history": citySearch
-    }
+    // var newHistoryObj = {
+    //     "history": citySearch
+    // }
 
-    history.push(newHistoryObj);
-    //push each searched city into history
-    // history.push(JSON.stringify(citySearch));
-    //set each history to local storage
+    history.push(citySearch);
     window.localStorage.setItem("history", JSON.stringify(history));
      
 
@@ -82,7 +80,7 @@ $("#submitBtn").on("click", function displayInfo(event) {
 
             //5-Day Forecase Cards
             $(".fiveDay").text("5-Day Forecast");
-            for (var i = 8; i < 40 ; i+=7){
+            for (var i = 0; i < 40 ; i+=8){
             var cardDiv = $("<div>").addClass("col").appendTo($("#forecast"));     
             var cardPanel = $("<div>").addClass("card-panel teal lighten-4 white z-depth-3").appendTo(cardDiv);     
             cardPanel.attr("id","autoGenCards");
@@ -123,11 +121,25 @@ function createPanel(citySearch){
     var searchPanel = $('<div class="searchPanelDiv"></div>');
     
     // searchPanel.attr("data-save","searchedCity");
-    var s0 = $("<span>").addClass("btn searchedCity").text(citySearch).appendTo(searchPanel);
+    var s0 = $('<span class="btn searchedCityBtn"></span>');
+    // var i0 = $('<i class="material-icons right" id="clearCity">close</i>');
+    
+    s0.text(citySearch).appendTo(searchPanel);
+    // s0.append(i0);
+    
+    
+    $("#searchHistoryDiv").append(searchPanel);
 
-    $(".input-field").append(searchPanel);
+
 }
 
+//search buttons created by each search
+$("#searchHistoryDiv").on("click", ".searchedCityBtn", function(){
+     $("#mainCard").empty();
+     $("#forecast").empty();
+    searchWeather($(this).text());
+
+ });
 
 
 
@@ -158,19 +170,6 @@ $.ajax({
         } else {
             uvClass.addClass("uvSev")
         }
-        console.log(typeof uvIndex);
-        console.log(uvIndex);
-      
-
- 
-
-  
-   
-
-    
-
-
-
 
 });
 
@@ -187,7 +186,22 @@ $.ajax({
     
 // });
 
-    //adding clear function to search box
+    //adding delete function to search history
+    // var deleteSearchedCity = document.querySelector('.searchedCity')
+    // var citySearchDiv = document.querySelector('.citySearch')
+
+    // citySearchDiv.addEventListener('input', function(){
+    //     if(this.value != "") clearCity.style.opacity = 1
+    //     else clearCity.style.opacity = 0
+    // });
+    
+    // clearCity.addEventListener('click', function(){
+    //     citySearchDiv.value = "";
+    //     this.style.opacity = 1
+    // });
+
+
+    //adding clear to history search
     var clearButton = document.getElementById('clear')
     var myInput = document.getElementById('citySearch')
 
@@ -200,6 +214,7 @@ $.ajax({
         myInput.value = "";
         this.style.opacity = 1
     });
+
 
     //clearing function to previous card inputs
     var mainCardClear = document.getElementById('mainCard');
@@ -217,17 +232,28 @@ $.ajax({
 
 });
 
-function displayHistory(){
+// function displayHistory(){
+//     //clear history div
+//     $('#searchHistoryDiv').empty()
 
-for(var i = 0; i < history.length; i++){
-    var historyHTML = 
-
-    //splice to remove i object
-
-    $(".input-field").append(historyHTML);
-    //clear history
+// for (var i = 0; i < history.length; i++){
     
-}
+//     var createHistoryDiv = $('<div class="searchPanelDiv"></div>');
+//     var s0 = $('<label class="btn searchedCity">${history[i].text}</label>');
+//     var i0 = $('<i class="material-icons right" id="clearCity">close</i>');
+    
+//     // s0.text(history[i]).text.appendTo(createHistoryDiv);
+//     s0.append(i0);
+    
+    
+//     $("#searchHistoryDiv").append(createHistoryDiv);
+//     console.log(history[i]);    //splice to remove i object
+
+    
+//     //clear history
+    
+// }
 
 
-}
+// }
+// displayHistory();
