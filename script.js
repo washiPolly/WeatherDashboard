@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+
+
 var resultsListSpan = document.querySelector("#resultsList");
 var mainCardSpan = document.querySelector("#mainCard").textContent;
 var autoGenCards;
@@ -19,7 +21,6 @@ $("#submitBtn").on("click", function displayInfo(event) {
     var citySearch = $("#citySearch").val().trim();
     console.log(citySearch);
     
-   
 
     
     // var newHistoryObj = {
@@ -31,7 +32,9 @@ $("#submitBtn").on("click", function displayInfo(event) {
      
 
     searchWeather(citySearch);
+    // apiError(citySearch);
     createPanel(citySearch);
+    
 
     });
 
@@ -49,6 +52,11 @@ $("#submitBtn").on("click", function displayInfo(event) {
             method: "GET"
         })
         .then(function (response) {
+
+            console.log(response.cod); 
+                        
+            
+            
             var results = response.data;
             console.log(response);
             console.log(response.list[0].dt_txt)
@@ -109,20 +117,48 @@ $("#submitBtn").on("click", function displayInfo(event) {
             
 
             cardSpan.append(p0, iconImage, p1, p2);
+            
+        
+
+            
         }
         
 
-        });      
+          
+
         
+    });
+         
+       
+       
+
     }
                        
-               
+              
             
 
 
 
 
 function createPanel(citySearch){
+    //trying to find a way to stop panels from generating if no citySearch
+    // console.log($(".cardCityText").innerText);
+    // var error = ($("#mainCard").html)
+    // if(error = ""){
+
+        // if (response.cod !==200){
+        //     M.toast({html: "Oops! We couldn't find your city, please try again!"})  
+        // } 
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + citySearch + "&units=imperial&uvi?&appid=30e1a5ef81aa152b5f387d986488443d"
+
+    $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+        .then(function (response) {
+
+        console.log($("#mainCard"));
+      
     var searchPanel = $('<div class="searchPanelDiv"></div>');
     
     // searchPanel.attr("data-save","searchedCity");
@@ -135,9 +171,12 @@ function createPanel(citySearch){
     
     $("#searchHistoryDiv").append(searchPanel);
 
+    
+
+
+});
 
 }
-
 //search buttons created by each search
 $("#searchHistoryDiv").on("click", ".searchedCityBtn", function(){
      $("#mainCard").empty();
@@ -234,6 +273,13 @@ $.ajax({
         console.log($("#autoGenCards"))
     });
 
+     // function modalTrigger (response)
+        // $(".modal").modal();
+        console.log(response);
+
+    
+
+        
 
 });
 
@@ -262,3 +308,4 @@ $.ajax({
 
 // }
 // displayHistory();
+

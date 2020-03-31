@@ -29,7 +29,7 @@
                     <input id="citySearch" type="search" required>
                   <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                   <i class="material-icons" id="clear">close</i>
-                  <button style="visibility:hidden;" id="submitBtn">Submit</button>
+                  <button href="#errorMsg" class="modal-trigger" style="visibility:hidden;" id="submitBtn">Submit</button>
                   <div id=searchHistoryDiv></div>
                   
                 </div>
@@ -69,10 +69,26 @@
  
     </div>
 
-  
+    <div class="container">
+      <!-- <a href="#errorMsg" class="modal-trigger">Error</a> -->
+
+      <div class="modal" id="errorMsg">
+        <div class="modal-content">
+          <h5>Oops!</h5>
+            <p>Please Try Again, looks like we can't find that city!</p>
+        </div>
+          <div class="modal-footer">
+          <a href="#" class="modal-close btn orange">Close</a>
+        </div>
+      </div>
+
+
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./script.js"></script>
+   
 </body>
 </html>
